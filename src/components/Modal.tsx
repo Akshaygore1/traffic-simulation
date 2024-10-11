@@ -1,0 +1,44 @@
+import { DIRECTIONS } from "../lib/enums";
+import DirectionControl from "./Directioncontrol";
+
+const SettingsModal = ({
+  isOpen,
+  onClose,
+  greenDurations,
+  onDurationChange,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  greenDurations: Record<string, number>;
+  onDurationChange: (direction: string, duration: number) => void;
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white p-4 rounded-lg w-96">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-bold">Traffic Light Settings</h2>
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700"
+          >
+            ×
+          </button>
+        </div>
+        <div className="space-y-4">
+          {DIRECTIONS.map((direction) => (
+            <DirectionControl
+              key={direction}
+              direction={direction}
+              greenDuration={greenDurations[direction]}
+              onChange={(duration) => onDurationChange(direction, duration)}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SettingsModal;
