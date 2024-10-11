@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import SettingsModal from "./components/Modal";
-import TrafficLight from "./components/Trafficlight";
 import {
   DEFAULT_GREEN_DURATION,
   DIRECTIONS,
   STATES,
   YELLOW_DURATION,
 } from "./lib/enums";
-import TrafficLight3D from "./components/ThreeDModel";
+import TrafficLight from "./components/TrafficLight";
 
 const TrafficLightSystem = () => {
   const [currentDirection, setCurrentDirection] = useState(0);
@@ -21,7 +20,7 @@ const TrafficLightSystem = () => {
       {}
     )
   );
-  const [isRunning, setIsRunning] = useState(true);
+  const [isRunning] = useState(true);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   useEffect(() => {

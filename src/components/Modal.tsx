@@ -1,6 +1,6 @@
 import { DIRECTIONS } from "../lib/enums";
-import DirectionControl from "./Directioncontrol";
 import { useEffect, useRef } from "react";
+import DirectionControl from "./DirectionControl";
 
 const SettingsModal = ({
   isOpen,
