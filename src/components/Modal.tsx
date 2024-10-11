@@ -1,5 +1,6 @@
 import { DIRECTIONS } from "../lib/enums";
 import DirectionControl from "./Directioncontrol";
+import { useEffect, useRef } from "react";
 
 const SettingsModal = ({
   isOpen,
@@ -12,11 +13,32 @@ const SettingsModal = ({
   greenDurations: Record<string, number>;
   onDurationChange: (direction: string, duration: number) => void;
 }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-4 rounded-lg w-96">
+      <div ref={modalRef} className="bg-white p-4 rounded-lg w-96">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-bold">Traffic Light Settings</h2>
           <button

@@ -67,7 +67,6 @@ const TrafficLightSystem = () => {
     if (directionIndex === currentDirection) {
       return currentState;
     }
-    // Show yellow for the next direction if we're transitioning
     if (directionIndex === nextDirection && currentState === STATES.YELLOW) {
       return STATES.YELLOW;
     }
@@ -88,20 +87,18 @@ const TrafficLightSystem = () => {
         </div>
 
         <div className="flex flex-col items-center gap-8">
-          {/* North light */}
+          {/* North light index 0 */}
           <TrafficLight state={getLightState(0)} />
 
           <div className="flex justify-around w-full">
-            {/* West light */}
+            {/* West light index 3*/}
             <TrafficLight state={getLightState(3)} />
 
-            {/* Center intersection */}
-
-            {/* East light */}
+            {/* East light index 1*/}
             <TrafficLight state={getLightState(1)} />
           </div>
 
-          {/* South light */}
+          {/* South light index 0*/}
           <TrafficLight state={getLightState(2)} />
         </div>
 
